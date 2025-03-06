@@ -24,10 +24,10 @@ const initScene = () : THREE.Scene => {
 
 const initCamera = () : THREE.PerspectiveCamera => {
   const camera = new THREE.PerspectiveCamera(
-    75,
+    55,
     window.innerWidth / window.innerHeight,
-    0.1,
-    10000
+    1,
+    20000
   );
   camera.position.set(30,30,100);
   return camera;
@@ -37,6 +37,7 @@ const initCamera = () : THREE.PerspectiveCamera => {
 const initRenderer = () : THREE.WebGLRenderer => {
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 0.3;
   document.body.append(renderer.domElement);
@@ -103,9 +104,9 @@ const initWater = () : Water => {
         texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
       }),
       sunDirection: new THREE.Vector3(),
-      sunColor: 0xff8800,
+      sunColor: 0xffffff,
       waterColor: 0x001e0f,
-      distortionScale: 3.7,
+      distortionScale: 2.5,
       fog: scene.fog !== undefined
     }
   );
@@ -254,6 +255,7 @@ const init = () : void => {
 const loop = () : void => {
   requestAnimationFrame(loop);
   render();
+  
   stats.update();
   animateWater();
 }
